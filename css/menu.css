@@ -1,0 +1,245 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --backgroundBody: #f8edeb;
+    --colorText: #c9184a;
+    --colorA: #E95A77;
+    --backgroundLiHover: #c9184a;
+    --colorMain: #c9184a;
+    --colorButtonMain: #FFFFFF;
+    --backgroundButtonMain: #E95A77;
+    --colorH2: #E95A77;
+    --backgroundCard: #E95A77;
+    --colorCard: #FFFFFF;
+    --backgroudCardHover: #B5EAEA;
+    --colorCardHover: #E95A77;
+    --backgroundButtonCard: #ffcad4;
+    --colorButtonCard: #FFFFFF;
+    --backgroundButtonCardHover: #f8edeb;
+    --colorButtonCardHover: #ffcad4;
+    --colorFooter:#FFFFFF;
+    --backgroundFooter: #ffcad4;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--backgroundBody);
+
+    header {
+        color: var(--colorText);
+        padding: 20px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        align-items: center;
+
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+
+            img {
+                width: 8rem;
+                height: auto;
+            }
+        }
+
+        nav {
+            ul {
+                list-style: none;
+                display: flex;
+                gap: 2rem;
+                margin-top: 15px;
+                justify-content: center;
+            
+                li {
+                    border-radius: 2rem;
+                    padding: 0.25rem 1rem;
+                    text-align: center;
+                    
+                    a {
+                        text-decoration: none;
+                        color: var(--colorA);
+                        font-weight: bold;
+                        transition: color 0.3s ease;
+                    }
+                }
+
+                li:hover {
+                    background-color: var(--backgroundLiHover);
+                    
+                    a {
+                        color: var(--backgroundBody);
+                    }
+                }
+            }
+        }
+
+    }
+
+    main {
+
+        background-size: cover;
+        background-repeat: no-repeat;
+        color: var(--colorMain);
+        text-align: center;
+        padding-bottom: 2rem;
+
+        input[type="text"] {
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid var(--backgroundButtonMain);
+            width: 250px;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: var(--backgroundButtonMain);
+            color: var(--colorButtonMain);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: var(--backgroundLiHover);
+        }
+    }
+
+    section {
+        text-align: center;
+        background-image: url(../assets/img/fondo.png);
+
+        h2 {
+            font-size: 2rem;
+            padding-top: 1rem;
+            color: var(--colorH2);
+        }
+
+        .product {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            padding: 20px;
+
+            .card {
+                background-color: var(--backgroundCard);
+                color: var(--colorCard);
+                padding: 20px;
+                width: 30%;
+                height: auto;
+                min-height: 400px;
+                border-radius: 20px;
+                transition: transform 0.2s ease, background-color 0.3s ease;
+                display: flex;
+                flex-direction: column;
+
+                h3 {
+                    margin-top: 0;
+                    font-size: 1.3rem;
+                }
+
+                img {
+                    object-fit: cover;
+                    border-radius: 10px;
+                    margin-bottom: 10px;
+                    width: 100%;
+                    height: auto;
+                }
+
+                p {
+                    margin: 5px 0;
+                }
+
+                button {
+                    background-color: var(--backgroundButtonCard);
+                    color: var(--colorButtonCard);
+                    padding: 10px;
+                    width: 100%;
+                    border: none;
+                    border-radius: 10px;
+                    margin-top: auto;
+                    cursor: pointer;
+                    font-weight: bold;
+                    transition: background-color 0.3s ease;
+                }
+
+                
+            
+            }
+
+            .card:hover {
+                transform: translateY(-5px);
+                background-color: var(--backgroudCardHover);
+                color: var(--colorCardHover);
+
+                button {
+                    background-color: var(--backgroundButtonCardHover);
+                    color: var(--colorButtonCardHover);
+                }
+            }
+        }
+    }
+
+    footer {
+        text-align: center;
+        background-color: var(--backgroundFooter);
+        color: var(--colorFooter);
+        padding: 30px 20px;
+        font-style: italic;
+        line-height: 1.6;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 1rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    main {
+        height: auto;
+        padding: 2rem 1rem;
+    }
+
+    main form {
+        flex-direction: column;
+    }
+
+    section h2 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .card h3 {
+        font-size: 1rem;
+    }
+
+    .card p {
+        font-size: 0.9rem;
+    }
+
+    main input,
+    main button {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+    }
+
+    footer {
+        font-size: 0.9rem;
+    }
+}

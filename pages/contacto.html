@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>Contacto</title>
+   <link rel="stylesheet" href="../css/contacto.css" />
+</head>
+
+<body>
+
+   <header>
+      <div class="header">
+            <img class="logo" src="../assets/img/logo.png" alt="imagen del logo de la empresa">
+        </div>
+
+        <nav>
+            <ul>
+                <li>
+                    <a class="a1" href="../index.html">Inicio</a>
+                </li>
+                <li>
+                    <a class="a3" href="./resenas.html">Reseñas</a>
+                </li>
+                <li>
+                    <a class="a4" href="./contacto.html">Contacto</a>
+                </li>
+            </ul>
+        </nav>
+   </header>
+
+   <main>
+        <form action="https://formspree.io/f/mrbqwanp" method="POST">
+            <fieldset>
+                <legend>Datos Personales</legend>
+                <p>
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" required minlength="3" maxlength="20" id="nombre" name="nomb" />*
+                </p>
+                <p>
+                    <label for="telefono">Teléfono:</label>
+                    <input type="tel" placeholder="15-555-555" id="telefono" name="tel" />
+                </p>
+                <p>
+                    <label for="mail">Correo Electrónico:</label>
+                    <input type="email" required placeholder="usuario@ejemplo.com" name="email" id="mail" />*
+                </p>
+                <p>
+                    <label for="mensaje">Mensaje:</label>
+                    <textarea id="mensaje" name="mensaje" rows="4" cols="50" required></textarea>*
+                </p>
+                <p>
+                    <input type="submit" name="enviar" id="boton-enviar" value="Enviar" />
+                    <input type="reset" name="limpiar" id="boton-limpiar" value="Limpiar" />
+                </p>
+            </fieldset>
+        </form>
+
+        <p><small>Los campos con * son obligatorios</small></p>
+   </main>
+
+</body>
+
+</html>

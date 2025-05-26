@@ -1,0 +1,156 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --colorText: #c9184a;
+    --backgroundBody: #f8edeb;
+    --colorA: #E95A77;
+    --backgroundLiHover: #c9184a;
+    --backgroundBody: #f8edeb;
+    --backgroundMain: #ffffff;
+    --colorMain: #c9184a;
+    --formBorder: #E95A77;
+    --colorLegend: #E95A77;
+    --inputBorder: #E95A77;
+    --backgroundInput: #E95A77 ;
+    --colorInput: #FFFFFF;
+    --backgrountInputHover: #c9184a;
+    --colorSmall: #888;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--backgroundBody);
+
+    header {
+        color: var(--colorText);
+        padding: 20px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        align-items: center;
+
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+
+            img {
+                width: 8rem;
+                height: auto;
+            }
+        }
+
+        nav {
+            ul {
+                list-style: none;
+                display: flex;
+                gap: 2rem;
+                margin-top: 15px;
+                justify-content: center;
+            
+                li {
+                    border-radius: 2rem;
+                    padding: 0.25rem 1rem;
+                    text-align: center;
+                    
+                    a {
+                        text-decoration: none;
+                        color: var(--colorA);
+                        font-weight: bold;
+                        transition: color 0.3s ease;
+                    }
+                }
+
+                li:hover {
+                    background-color: var(--backgroundLiHover);
+                    
+                    a {
+                        color: var(--backgroundBody);
+                    }
+                }
+            }
+        }
+
+    }
+
+    main {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background-color: var(--backgroundMain);
+        border-radius: 20px;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        color: var(--colorMain);
+
+        form fieldset {
+            border: 2px solid var(--formBorder);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 1rem;
+
+            legend {
+                font-size: 1.5rem;
+                color: var(--colorLegend);
+                padding: 0 10px;
+                font-weight: bold;
+            }
+
+            p {
+                margin-bottom: 15px;
+                text-align: left;
+
+                label {
+                    display: block;
+                    margin-bottom: 5px;
+                    font-weight: bold;
+                }
+
+                input[type="text"],
+                input[type="tel"],
+                input[type="email"],
+                textarea {
+                    width: 100%;
+                    padding: 10px;
+                    border: 1px solid var(--inputBorder);
+                    border-radius: 8px;
+                    font-size: 1rem;
+                    resize: vertical;
+                }
+
+                textarea {
+                    min-height: 100px;
+                }
+
+                input[type="submit"],
+                input[type="reset"] {
+                    background-color: var(--backgroundInput);
+                    color: var(--colorInput);
+                    border: none;
+                    padding: 10px 20px;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    font-weight: bold;
+                    margin-right: 10px;
+                    transition: background-color 0.3s ease;
+                }
+
+                input[type="submit"]:hover,
+                input[type="reset"]:hover {
+                    background-color: var(--backgrountInputHover);
+                }
+
+            }
+        }
+
+        small {
+            color: var(--colorSmall);
+            font-style: italic;
+        }
+    }
+}
