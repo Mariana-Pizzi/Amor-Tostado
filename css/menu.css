@@ -114,9 +114,12 @@ body {
         }
     }
 
+    .contenedorPrincipal{
+        background-image: url(../assets/img/fondo.png);
+    }
+
     section {
         text-align: center;
-        background-image: url(../assets/img/fondo.png);
 
         h2 {
             font-size: 2rem;
@@ -198,12 +201,128 @@ body {
         font-style: italic;
         line-height: 1.6;
     }
+
+    .contenedorPrincipal {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 2rem;
+        padding: 2rem;
+    }
+
+    .contenido {
+        flex: 3;
+    }
+
+    .carritoLateral {
+        flex: 1;
+        position: sticky;
+        top: 2rem;
+        background-color: #fff0f4;
+        border: 2px solid var(--backgroundButtonCard);
+        border-radius: 16px;
+        padding: 1rem;
+        height: fit-content;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        font-size: 0.95rem;
+    }
+
+    .carritoLateral h2 {
+        color: var(--colorMain);
+        margin-bottom: 1rem;
+    }
+
+    .carritoLateral ul {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 1rem 0;
+    }
+
+    .carritoLateral li {
+        margin-bottom: 0.5rem;
+        padding: 0.5rem;
+        background-color: var(--backgroundButtonCard);
+        color: var(--colorButtonCard);
+        border-radius: 10px;
+    }
+
+    .carritoLateral button {
+        width: 100%;
+        background-color: var(--backgroundButtonCardHover);
+        color: var(--colorButtonCardHover);
+        border: none;
+        border-radius: 10px;
+        padding: 10px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .carritoLateral button:hover {
+        background-color: var(--backgroundLiHover);
+        color: var(--colorButtonMain);
+    }
+
+    #finalizarCompraBtn {
+        background-color: var(--backgroundButtonMain);
+        color: var(--colorButtonMain);
+        border: none;
+        border-radius: 10px;
+        padding: 10px 20px;
+        cursor: pointer;
+        margin-top: 1rem;
+        width: 100%;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    #finalizarCompraBtn:hover {
+        background-color: var(--backgroundLiHover);
+    }
 }
+
+#mensajeAgregado {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #d4edda;
+    color: #155724;
+    padding: 12px 20px;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+    font-weight: bold;
+    z-index: 9999;
+    display: none;
+}
+
+#mensajeAgregado.mostrar {
+    display: block;
+    animation: fadeOut 2s forwards;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
 
 @media only screen and (max-width: 600px) {
     nav ul {
         flex-direction: column;
         align-items: center;
+    }
+
+    .contenedorPrincipal {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .carritoLateral {
+        position: relative;
+        top: 0;
+        width: 100%;
+        margin-top: 2rem;
     }
     
     .card {
@@ -225,4 +344,27 @@ body {
     .card {
         flex: 1 1 calc(33.33% - 40px);
     }
+}
+
+#botonArriba {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: none; /* Lo mostrás cuando querés con JS */
+}
+
+#botonArriba svg {
+    width: 50px;
+    height: 50px;
+    fill: var(--colorA);
+    transition: transform 0.3s ease;
+}
+
+#botonArriba:hover svg {
+    transform: scale(1.1);
 }
