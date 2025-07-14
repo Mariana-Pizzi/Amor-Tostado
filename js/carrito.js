@@ -32,23 +32,37 @@ function handleCart(){
         cuerpo += `
             <tr>
                 <td>${producto.titulo}</td>
-                <td>${producto.cantidad}</td>
+                <td>
+                    <button class="restar" data-titulo="${producto.titulo}">−</button>
+                    ${producto.cantidad}
+                    <button class="sumar" data-titulo="${producto.titulo}">+</button>
+                </td>
                 <td>$${subtotal}</td>
             </tr>
         `;
     });
 
     cuerpo += '<tbody>';
-
     tabla.innerHTML = encabezado + cuerpo;
-
     carritoContainer.appendChild(tabla);
 
-    let precioFinal = document.createElement('p');
-    precioFinal.innerText = `Total a pagar: $${total}`;
-    
+    const precioFinal = document.createElement('p');
+    const totalCalculado = carrito.reduce((sum, prod) => sum + prod.cantidad * parseFloat(prod.precio), 0);
+    precioFinal.innerText = `Total a pagar: $${totalCalculado}`;
     carritoContainer.appendChild(precioFinal);
 
+    document.querySelectorAll('.sumar').forEach(boton => {
+        boton.addEventListener('click', () => {
+            modificarCantidad(boton.dataset.titulo, +1);
+        });
+    });
+
+    document.querySelectorAll('.restar').forEach(boton => {
+        boton.addEventListener('click', () => {
+            modificarCantidad(boton.dataset.titulo, -1);
+        });
+    });
+    
     let finalizarCompra = document.createElement('button');
 
 }
@@ -59,10 +73,30 @@ function vaciarCarrito() {
         localStorage.removeItem('total');
 
         const carritoContainer = document.getElementById('itemProductos');
-        carritoContainer.innerHTML = '';
+        carritoContainer.innerHTML = `<p>No hay productos en el carrito :(</p>`;
 
         document.querySelector('.count').innerText = '0';
     }
+}
+
+function modificarCantidad(titulo, cambio) {
+    const carrito = JSON.parse(localStorage.getItem('productos')) || [];
+    const producto = carrito.find(p => p.titulo === titulo);
+    if (!producto) return;
+
+    producto.cantidad += cambio;
+
+    if (producto.cantidad <= 0) {
+        const index = carrito.findIndex(p => p.titulo === titulo);
+        carrito.splice(index, 1);
+    }
+
+    const nuevoTotal = carrito.reduce((sum, prod) => sum + prod.cantidad * parseFloat(prod.precio), 0);
+
+    localStorage.setItem('productos', JSON.stringify(carrito));
+    localStorage.setItem('precioTotal', nuevoTotal.toString());
+
+    location.reload();
 }
 
 document.addEventListener('DOMContentLoaded', handleCart);
