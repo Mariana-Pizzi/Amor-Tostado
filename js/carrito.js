@@ -1,86 +1,87 @@
-function handleCart(){
-    const carrito = JSON.parse(localStorage.getItem('productos')) || [];
-    const total = localStorage.getItem('precioTotal') || 0;
+let carrito = JSON.parse(localStorage.getItem('productos')) || [];
+let precioTotal = parseFloat(localStorage.getItem('precioTotal')) || 0;
 
-    let carritoContainer = document.getElementById('itemProductos');
+function actualizarContador() {
+    const countElement = document.querySelector('.count');
+    if (countElement) {
+        countElement.innerText = carrito.reduce((acc, prod) => acc + prod.cantidad, 0);
+    }
+}
 
-    if(carrito.length === 0){
-        carritoContainer.innerHTML = `
-        <p>No hay productos en el carrito :(</p>`;
+function generarResumenPedido() {
+    if (carrito.length === 0) return 'Carrito vacío';
+
+    let resumen = 'Resumen de la compra:\n';
+    carrito.forEach(item => {
+        const precioFinal = (parseFloat(item.precio) * item.cantidad).toFixed(2);
+        resumen += `${item.titulo} x${item.cantidad} - $${precioFinal}\n`;
+    });
+
+    const total = carrito.reduce((acc, item) => acc + parseFloat(item.precio) * item.cantidad, 0);
+    resumen += `Total: $${total.toFixed(2)}`;
+    return resumen;
+}
+
+function actualizarCarritoUI() {
+    const listaCarrito = document.getElementById('listaCarrito');
+    const totalCarrito = document.getElementById('totalCarrito');
+    const pedidoInput = document.getElementById('pedidoInput');
+
+    if (!listaCarrito || !totalCarrito || !pedidoInput) return;
+
+    listaCarrito.innerHTML = '';
+
+    if (carrito.length === 0) {
+        const li = document.createElement('li');
+        li.textContent = 'Tu carrito está vacío.';
+        listaCarrito.appendChild(li);
+        totalCarrito.textContent = 'Total: $0.00';
+        pedidoInput.value = 'Carrito vacío';
         return;
     }
 
-    let tabla = document.createElement('table');
-    tabla.classList.add('table');
-
-    let encabezado = `
-        <thead>
-            <tr>
-                <th>Producto</th>
-                <th>Cantidad</th>
-                <th>Precio</th>
-            </tr>
-        </thead>
-    `;
-
-    let cuerpo = '<tbody>';
-
-    carrito.forEach( producto => {
-        const precioUnitario = parseFloat(producto.precio);
-        const subtotal = precioUnitario * producto.cantidad;
+    carrito.forEach(item => {
+        const li = document.createElement('li');
+        const precioFinal = (parseFloat(item.precio) * item.cantidad).toFixed(2);
         
-        cuerpo += `
-            <tr>
-                <td>${producto.titulo}</td>
-                <td>
-                    <button class="restar" data-titulo="${producto.titulo}">−</button>
-                    ${producto.cantidad}
-                    <button class="sumar" data-titulo="${producto.titulo}">+</button>
-                </td>
-                <td>$${subtotal}</td>
-            </tr>
+        li.innerHTML = `
+            <span>${item.titulo}</span>
+            <div style="display: flex; align-items: center; gap: 8px; margin: 0.5rem 0;">
+                <button onclick="modificarCantidad('${item.titulo}', -1)">➖</button>
+                <span>${item.cantidad}</span>
+                <button onclick="modificarCantidad('${item.titulo}', 1)">➕</button>
+            </div>
+            <span>$${precioFinal}</span>
         `;
+
+        listaCarrito.appendChild(li);
+        
     });
 
-    cuerpo += '<tbody>';
-    tabla.innerHTML = encabezado + cuerpo;
-    carritoContainer.appendChild(tabla);
+    const total = carrito.reduce((acc, item) => acc + parseFloat(item.precio) * item.cantidad, 0);
+    totalCarrito.textContent = `Total: $${total.toFixed(2)}`;
+    pedidoInput.value = generarResumenPedido();
+}
 
-    const precioFinal = document.createElement('p');
-    const totalCalculado = carrito.reduce((sum, prod) => sum + prod.cantidad * parseFloat(prod.precio), 0);
-    precioFinal.innerText = `Total a pagar: $${totalCalculado}`;
-    carritoContainer.appendChild(precioFinal);
-
-    document.querySelectorAll('.sumar').forEach(boton => {
-        boton.addEventListener('click', () => {
-            modificarCantidad(boton.dataset.titulo, +1);
-        });
-    });
-
-    document.querySelectorAll('.restar').forEach(boton => {
-        boton.addEventListener('click', () => {
-            modificarCantidad(boton.dataset.titulo, -1);
-        });
-    });
-    
-    let finalizarCompra = document.createElement('button');
-
+function guardarYActualizar() {
+    precioTotal = carrito.reduce((acc, item) => acc + parseFloat(item.precio) * item.cantidad, 0);
+    localStorage.setItem('productos', JSON.stringify(carrito));
+    localStorage.setItem('precioTotal', precioTotal.toFixed(2));
+    actualizarContador();
+    actualizarCarritoUI();
 }
 
 function vaciarCarrito() {
     if(confirm("Estás seguro de que deseas vaciar el carrito?")) {
+        carrito = [];
+        precioTotal = 0;
         localStorage.removeItem('productos');
         localStorage.removeItem('total');
-
-        const carritoContainer = document.getElementById('itemProductos');
-        carritoContainer.innerHTML = `<p>No hay productos en el carrito :(</p>`;
-
-        document.querySelector('.count').innerText = '0';
+        guardarYActualizar();
     }
 }
 
 function modificarCantidad(titulo, cambio) {
-    const carrito = JSON.parse(localStorage.getItem('productos')) || [];
     const producto = carrito.find(p => p.titulo === titulo);
     if (!producto) return;
 
@@ -91,14 +92,13 @@ function modificarCantidad(titulo, cambio) {
         carrito.splice(index, 1);
     }
 
-    const nuevoTotal = carrito.reduce((sum, prod) => sum + prod.cantidad * parseFloat(prod.precio), 0);
-
-    localStorage.setItem('productos', JSON.stringify(carrito));
-    localStorage.setItem('precioTotal', nuevoTotal.toString());
-
-    location.reload();
+    guardarYActualizar();
 }
 
-document.addEventListener('DOMContentLoaded', handleCart);
+document.addEventListener('DOMContentLoaded', () => {
+    actualizarContador();
+    actualizarCarritoUI();
+});
 
 window.vaciarCarrito = vaciarCarrito;
+window.modificarCantidad = modificarCantidad(titulo, cambio)
