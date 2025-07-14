@@ -30,7 +30,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
             
-            
+            const mensaje = document.getElementById('mensajeAgregado');
+            mensaje.textContent = `✅ Se agregó "${tituloProducto.textContent}" al carrito`;
+            mensaje.classList.add('mostrar');
+            setTimeout(() => {
+                mensaje.classList.remove('mostrar');
+            }, 2000);
 
             precioTotal += parseFloat(precioProducto);
 
