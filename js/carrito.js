@@ -26,11 +26,14 @@ function handleCart(){
     let cuerpo = '<tbody>';
 
     carrito.forEach( producto => {
+        const precioUnitario = parseFloat(producto.precio);
+        const subtotal = precioUnitario * producto.cantidad;
+        
         cuerpo += `
             <tr>
                 <td>${producto.titulo}</td>
                 <td>${producto.cantidad}</td>
-                <td>$${producto.precio}</td>
+                <td>$${subtotal}</td>
             </tr>
         `;
     });

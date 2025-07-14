@@ -2,6 +2,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let carrito = JSON.parse(localStorage.getItem('productos')) || [];
     let precioTotal = parseFloat(localStorage.getItem('precioTotal')) || 0;
 
+    const countElement = document.querySelector('.count');
+    if (countElement) {
+        countElement.innerText = carrito.reduce((acc, prod) => acc + prod.cantidad, 0);
+    }
+
     let cards = document.querySelectorAll('.card');
 
     cards.forEach(card => {
@@ -10,25 +15,31 @@ document.addEventListener('DOMContentLoaded', () => {
         const tituloProducto = card.querySelector('h3');
 
         const precioP = Array.from(card.querySelectorAll('p')).find(p => p.textContent.includes('Precio'));
-        const precioProducto = precioP ? precioP.textContent.replace('Precio: $', '').trim() : '0';
-        
-        console.log('Precio crudo:', precioP ? precioP.textContent : 'No hay precio');
-        console.log('Precio procesado:', precioProducto);   
+        const precioProducto = precioP ? precioP.textContent.replace('Precio: $', '').trim() : '0'; 
 
         botonClick.addEventListener('click', () => {
-            const producto = {
-                titulo: tituloProducto.textContent,
-                precio: precioProducto,
-                cantidad: 1
-            };
+            const productoExistente = carrito.find(item => item.titulo === tituloProducto.textContent);
 
-            carrito.push(producto);
-            precioTotal += parseFloat(producto.precio);
+            if(productoExistente){
+                productoExistente.cantidad++;
+            } else {
+                carrito.push({
+                    titulo: tituloProducto.textContent,
+                    precio: precioProducto,
+                    cantidad: 1
+                });
+            }
+            
+            
+
+            precioTotal += parseFloat(precioProducto);
 
             localStorage.setItem('productos', JSON.stringify(carrito));
             localStorage.setItem('precioTotal', precioTotal);
 
-            document.querySelector('.count').innerText = carrito;
+            if (countElement) {
+                countElement.innerText = carrito.reduce((acc, prod) => acc + prod.cantidad, 0);
+            }
         });
     });
 });
