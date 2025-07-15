@@ -98,6 +98,10 @@ function modificarCantidad(titulo, cambio) {
 document.addEventListener('DOMContentLoaded', () => {
     actualizarContador();
     actualizarCarritoUI();
+
+    botonCarrito.addEventListener('click', () => {
+        window.location.href = "./pages/carrito.html"
+    });
 });
 
 window.vaciarCarrito = vaciarCarrito;

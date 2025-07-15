@@ -42,6 +42,7 @@
     --mensajeBorder: #c3e6cb;
     --botonArriba: #E95A77;
     --sinResultadoColor: #555;
+    --botonCarrito: #FFFFFF;
 }
 
 body {
@@ -325,6 +326,30 @@ body {
     #botonArriba:hover svg {
         transform: scale(1.1);
     }
+
+    #botonCarrito {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        z-index: 1000;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 1px;
+        border: 4px solid var(--botonCarrito);
+        border-radius: 100%;
+        
+        svg {
+            width: 50px;
+            height: 50px;
+            fill: var(--botonCarrito);
+            transition: transform 0.3s ease;
+        }
+    }
+    
+    #botonCarrito:hover svg {
+        transform: scale(1.1);
+    }
     
     footer {
         text-align: center;
@@ -362,13 +387,6 @@ body {
         padding: 1rem;
     }
     
-    .carritoLateral {
-        position: relative;
-        top: 0;
-        width: 100%;
-        margin-top: 2rem;
-    }
-    
     .card {
         flex: 1 1 100%;
     }
@@ -376,16 +394,28 @@ body {
     .logo {
         max-width: 120px;
     }
+
+    .carritoLateral {
+        display: none !important;
+    }
 }
 
 @media only screen and (min-width: 601px) and (max-width: 1199px) {
     .card {
         flex: 1 1 calc(50% - 40px);
     }
+
+    #botonCarrito {
+        display: none;
+    }
 }
 
 @media only screen and (min-width: 1200px) {
     .card {
         flex: 1 1 calc(33.33% - 40px);
+    }
+
+    #botonCarrito {
+        display: none;
     }
 }
