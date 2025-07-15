@@ -250,6 +250,11 @@ body {
             color: var(--liColorCarrito);
             border-radius: 10px;
         }
+
+        p {
+            font-weight: bold;
+            margin-top: 1rem;
+        }
         
         button {
             width: 100%;

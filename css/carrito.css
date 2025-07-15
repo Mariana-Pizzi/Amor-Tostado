@@ -1,0 +1,158 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --backgroundBody: #f8edeb;
+    --colorText: #c9184a;
+    --colorH2: #E95A77;
+    --liBackCarrito: #ffcad4;
+    --liColorCarrito: #FFFFFF;
+    --buttonBackCarrito: #f8edeb;
+    --buttonColorCarrito: #ffcad4;
+    --buttonHoverBackCarrito: #c9184a;
+    --buttonHoverCarrito: #FFFFFF;
+    --backgroundFooter: #ffcad4;
+    --colorFooter: #FFFFFF;
+    --finalBackButton: #E95A77;
+    --finalColorButton: #FFFFFF;
+    --finalBackHover: #c9184a;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--backgroundBody);
+    padding: 1rem;
+}
+
+header {
+    text-align: center;
+    padding: 1rem;
+}
+
+.header img.logo {
+    width: 8rem;
+    height: auto;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+nav li {
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    background-color: var(--backgroundBody);
+    transition: background-color 0.3s ease;
+}
+
+nav li:hover {
+    background-color: var(--colorText);
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--colorText);
+    font-weight: bold;
+}
+
+nav li:hover a {
+    color: white;
+}
+
+.tablaProductos {
+    max-width: 600px;
+    margin: 2rem auto;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.tablaProductos h2 {
+    color: var(--colorH2);
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+#listaCarrito {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+    
+    li {
+        background-color: var(--liBackCarrito);
+        color: var(--liColorCarrito);
+        padding: 1rem;
+        border-radius: 10px;
+        margin-bottom: 0.75rem;
+    }
+}
+
+p {
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--buttonBackCarrito);
+    color: var(--buttonColorCarrito);
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--buttonHoverBackCarrito);
+    color: var(--buttonHoverCarrito);
+}
+
+#finalizarCompraBtn {
+    background-color: var(--finalBackButton);
+    color: var(--finalColorButton);
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 1rem;
+    width: 100%;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+#finalizarCompraBtn:hover {
+    background-color: var(--finalBackHover);
+}
+footer {
+    text-align: center;
+    background-color: var(--backgroundFooter);
+    color: var(--colorFooter);
+    padding: 30px 20px;
+    font-style: italic;
+    line-height: 1.6;
+    margin-top: 2rem;
+}
+
+@media screen and (max-width: 600px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tablaProductos {
+        padding: 1rem;
+        margin: 1rem;
+    }
+}

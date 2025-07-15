@@ -76,7 +76,7 @@ function vaciarCarrito() {
         carrito = [];
         precioTotal = 0;
         localStorage.removeItem('productos');
-        localStorage.removeItem('total');
+        localStorage.removeItem('precioTotal');
         guardarYActualizar();
     }
 }
@@ -98,10 +98,14 @@ function modificarCantidad(titulo, cambio) {
 document.addEventListener('DOMContentLoaded', () => {
     actualizarContador();
     actualizarCarritoUI();
-
-    botonCarrito.addEventListener('click', () => {
-        window.location.href = "./pages/carrito.html"
-    });
+    
+    const botonCarrito = document.getElementById('botonCarrito');
+    
+    if(botonCarrito) {
+        botonCarrito.addEventListener('click', () => {
+            window.location.href = "./pages/carrito.html"
+        });
+    }    
 });
 
 window.vaciarCarrito = vaciarCarrito;
