@@ -43,6 +43,7 @@
     --botonArriba: #E95A77;
     --sinResultadoColor: #555;
     --botonCarrito: #FFFFFF;
+    --navPrincipalHamburguesa: #E95A77;
 }
 
 body {
@@ -379,6 +380,34 @@ body {
         font-size: 1.2rem;
         color: var(--sinResultadoColor);
     }
+
+    .hamburguesa {
+        display: none;
+        width: 40px;
+        height: 40px;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        position: relative;
+        padding: 0;
+    }
+
+   .hamburguesa span {
+        position: absolute;
+        left: 8px; right: 8px;
+        height: 2px;
+        background: var(--colorA);
+        border-radius: 2px;
+        transition: transform .25s ease, opacity .25s ease, top .25s ease;
+    } 
+    .hamburguesa span:nth-child(1) { top: 12px; }
+    .hamburguesa span:nth-child(2) { top: 19px; }
+    .hamburguesa span:nth-child(3) { top: 26px; }
+
+    .hamburguesa.is-open span:nth-child(1) { top: 19px; transform: rotate(45deg); }
+    .hamburguesa.is-open span:nth-child(2) { opacity: 0; }
+    .hamburguesa.is-open span:nth-child(3) { top: 19px; transform: rotate(-45deg); }
+
 }
 
 
@@ -391,6 +420,7 @@ body {
 @media only screen and (max-width: 600px) {
     body header {
         justify-content: space-evenly;
+        position: relative;
     }
 
     body header .header-img {
@@ -423,6 +453,39 @@ body {
     .carritoLateral {
         display: none !important;
     }
+
+    body .hamburguesa {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 60;
+    }
+
+    body header #nav-principal {
+        position: absolute;
+        top: 100%;       /* justo debajo del header */
+        left: 0; right: 0;
+        display: none;
+        background: var(--backgroundBody);
+        box-shadow: 0 8px 16px rgba(0,0,0,.06);
+        z-index: 50;
+    }
+
+    body header #nav-principal.is-open { 
+        display: block;
+    }
+
+    body header #nav-principal ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        margin: 0;
+        padding: 12px 16px;
+        gap: 0;
+    }
+
+    body header #nav-principal li { padding: 8px 0; }
+    body header #nav-principal a { display: block; }
 }
 
 @media only screen and (min-width: 601px) and (max-width: 1199px) {
